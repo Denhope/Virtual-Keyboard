@@ -10,5 +10,8 @@ module.exports = {
   },
   plugins: ['import'],
   ignorePatterns: ['dist', 'node_modules'],
-  rules: {},
+  rules: {
+    'linebreak-style': ['error', 'windows'],
+    'import/prefer-default-export': off,
+  },
 };
