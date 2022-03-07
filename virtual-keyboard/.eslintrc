@@ -13,10 +13,15 @@
   "plugins": [
     "import"
   ],
-  "ignorePatterns": ["dist", "node_modules"],
+  "ignorePatterns": [
+    "dist",
+    "node_modules"
+  ],
   "rules": {
-    "linebreak-style": ["error", "windows"],
+    "linebreak-style": [
+      "error",
+      "windows"
+    ],
     "import/prefer-default-export": "off"
-    
   }
 }
