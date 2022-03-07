@@ -1,33 +1,26 @@
-// colors//
+//@ colors
 $white: #ffffff;
 $black: #000000;
 $blackMat: #1c1c1c;
-$lilow: linear-gradient(209deg, #f2e8ee, #dfbaba 81%);
-$lilow-whight: linear-gradient(125deg, rgb(66, 51, 66), rgb(130, 106, 106) 81%);
-$violet: linear-gradient(171deg, #280228, #1c1c1c 81%);
-$violet-grey: linear-gradient(125deg, rgb(40, 2, 40), rgb(130, 106, 106) 81%);
-$shadow: 12px 15px 20px 0 rgb(46 61 73 / 50%);
-$shodow-dark: 1px 0px 10px 10px rgb(16 17 17 / 35%);
+$gray:linear-gradient(125deg, #999797, #999393 81%);
+
+//@ shadow
+$shadow: 12px 15px 20px 0 rgba(197, 209, 219, 0.5);
+
+//@ hover
+$hover: invert(0%) sepia(6%) saturate(1898%) hue-rotate(316deg) brightness(70%)
+  contrast(78%);
 
 //@ text
 $color-text: $white;
 $color-text-light: $blackMat;
 $color-fill: $blackMat;
 
-//@ blocks
-$background-result-window: $violet-grey;
-$background-score-block: $violet-grey;
-$background-game-board: $violet-grey;
-$background-start-window: $violet-grey;
-$background-card: $lilow;
+//@ keyboard
+$background-keyboard: $gray;
 
-//@a buttons
-$hover: invert(0%) sepia(6%) saturate(1898%) hue-rotate(316deg) brightness(70%)
-  contrast(78%);
-$background-button-hovered: $violet;
-$background-button: $lilow-whight;
 
-//@at-root width
+//@ width
 $content-width: 840px;
 $content-width-620: 620px;
 $laptop-width: 840px;

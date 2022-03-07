@@ -1,17 +1,17 @@
 // //Abstract
-// @import "abstract/constants";
-// @import "abstract/placeholders";
-// @import "abstract/mixins";
+@import "abstract/constants";
+@import "abstract/placeholders";
+@import "abstract/mixins";
 
 // //Base
-// @import "base/normalize";
+@import "base/normalize";
 // @import "base/base";
 // @import "base/button";
 // // @import "base/icons";
 
 // //Layouts
-// @import "layouts/wrapper";
-// @import "layouts/header";
+@import "layouts/wrapper";
+@import "layouts/keyboard";
 // @import "layouts/footer";
 // @import "layouts/gameBoard";
 // @import "layouts/startWindow";
