@@ -8,7 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env, options) => {
   const isProduction = options.mode === 'production';
-  // const isAnalyze = env.analyze;.
+  // const isAnalyze = env.analyze;
   const config = {
     mode: isProduction ? 'production' : 'development',
     devtool: isProduction ? 'source-map' : 'eval',
@@ -19,9 +19,9 @@ module.exports = (env, options) => {
       filename: 'script.js',
       assetModuleFilename: 'assets/public/[hash][ext]',
     },
-    // optimization: {
-    //   minimize: false,
-    // },
+    optimization: {
+      minimize: false,
+    },
     resolve: {
       extensions: ['.js', '.json', '.mjs'],
     },
@@ -65,14 +65,7 @@ module.exports = (env, options) => {
       new MiniCssExtractPlugin({
         filename: 'style.css',
       }),
-      // new CopyPlugin({
-      //   patterns: [
-      //     { from: './src/assets/img', to: './assets/img' },
-      //     { from: './src/js/', to: './assets/js' },
-      //   ],
-      // }),
     ],
-    // ...devServer()
   };
 
   return config;
