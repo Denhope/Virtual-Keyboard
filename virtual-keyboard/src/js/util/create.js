@@ -35,7 +35,7 @@ const create = (el, classNames, children, parent, ...dataAttr) => {
       if (attrValue === '') {
         element.setAttribute(attrName, '');
       }
-      if (attrName.match(/value|id|placeholder|cols|rows|autocorrect|spellcheck/)) {
+      if (attrName.match(/value|id|placeholder|cols|rows|autocorrect/)) {
         element.setAttribute(attrName, attrValue);
       } else {
         // for data atrr
