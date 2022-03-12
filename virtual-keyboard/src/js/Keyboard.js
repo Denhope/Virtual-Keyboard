@@ -17,7 +17,7 @@ class Keyboard {
 
   initialize(langString) {
     // change rowsKeyboard (ru||en||...)
-    this.keyElements = language[langString]; // []
+    this.keyLangBase = language[langString]; // []
     // create texarea
     this.textOutput = create(
       'textarea',
@@ -44,7 +44,7 @@ class Keyboard {
       rowElem.style.gridTemplateColumns = `repeat(${row.length}, 1fr)`;
       row.forEach((code) => {
         // key object from language
-        const keyElemObj = this.keyElements.find((key) => key.code === code);
+        const keyElemObj = this.keyLangBase.find((key) => key.code === code);
         if (keyElemObj) {
           const keyButton = new Key(keyElemObj);
           this.keyButtons.push(keyButton);
