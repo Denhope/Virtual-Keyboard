@@ -2,14 +2,13 @@
 $white: #ffffff;
 $black: #000000;
 $blackMat: #1c1c1c;
-$gray:linear-gradient(125deg, #999797, #999393 81%);
+$gray: linear-gradient(125deg, #999797, #999393 81%);
 
 //@ shadow
 $shadow: 12px 15px 20px 0 rgba(197, 209, 219, 0.5);
 
 //@ hover
-$hover: invert(0%) sepia(6%) saturate(1898%) hue-rotate(316deg) brightness(70%)
-  contrast(78%);
+$hover: invert(0%) sepia(6%) saturate(1898%) hue-rotate(316deg) brightness(70%) contrast(78%);
 
 //@ text
 $color-text: $white;
@@ -18,7 +17,6 @@ $color-fill: $blackMat;
 
 //@ keyboard
 $background-keyboard: $gray;
-
 
 //@ width
 $content-width: 840px;

@@ -1,0 +1,13 @@
+.keyboard__key {
+  color: $color-text;
+  background: black;
+  display: flex;
+  cursor: pointer;
+  border-radius: 3px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @extend %transition;
+  -webkit-border-radius: 3px;
+  user-select: none;
+}
