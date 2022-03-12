@@ -1,6 +1,7 @@
 import { language } from './lang/language';
 import { create } from './util/create';
 import { Key } from './Key';
+import { setLocalStorage } from './util/storage';
 
 // create main
 const wrapper = create('div', 'wrapper main__wrapper', [
@@ -15,9 +16,9 @@ class Keyboard {
     this.keysActive = {};
   }
 
-  initialize(langString) {
+  initialize(lang) {
     // change rowsKeyboard (ru||en||...)
-    this.keyLangBase = language[langString]; // []
+    this.keyLangBase = language[lang]; // []
     // create texarea
     this.textOutput = create(
       'textarea',
@@ -30,7 +31,7 @@ class Keyboard {
       ['autocorect', 'off'],
     );
 
-    this.keyboardDiv = create('div', 'keyboard', null, wrapper, ['language', langString]);
+    this.keyboardDiv = create('div', 'keyboard', null, wrapper, ['language', lang]);
     document.body.appendChild(main);
     main.appendChild(wrapper);
     return this;
@@ -68,13 +69,48 @@ class Keyboard {
     if (!keyElemObj) return;
 
     if (type.match(/keydown/)) {
+      console.log(code, type);
       if (type.match(/key/)) evt.preventDefault();
-      // console.log(keyElemObj);
       keyElemObj.div.style.backgroundColor = 'yellow';
+
+      // change lang
+      if (code.match(/ShiftLeft/)) this.shiftKey = true;
+      if (code.match(/AltLeft/)) this.altKey = true;
+
+      if (code.match(/ShiftLeft/) && this.altKey) this.changeLanguage();
+      if (code.match(/AltLeft/) && this.shiftKey) this.changeLanguage();
     } else if (type.match(/keyup/)) {
       // console.log(keyElemObj);
+      if (code.match(/ShiftLeft/)) this.shiftKey = false;
+      if (code.match(/AltLeft/)) this.altKey = false;
       keyElemObj.div.style.backgroundColor = 'black';
     }
+  };
+
+  changeLanguage = () => {
+    const langID = Object.keys(language);
+    let langIndex = langID.indexOf(this.keyboardDiv.dataset.language);
+
+    this.keyLangBase =
+      langIndex + 1 < langID.length
+        ? language[langID[(langIndex += 1)]]
+        : language[langID[(langIndex -= langIndex)]];
+
+    this.keyboardDiv.dataset.language = langID[langIndex];
+    setLocalStorage('lang', langID[langIndex]);
+
+    this.keyButtons.forEach((keybutton) => {
+      const keyElemObj = this.keyLangBase.find((key) => key.code === keybutton.code);
+      if (!keyElemObj) return;
+      keybutton.shift = keyElemObj.shift;
+      keybutton.small = keyElemObj.small;
+      if (keyElemObj.shift && keyElemObj.shift.match(/[^a-zA-Zа-яА-ЯёЁ0-9]/g)) {
+        keybutton.subEl.innerHTML = keyElemObj.shift;
+      } else {
+        keybutton.subEl.innerHTML = '';
+      }
+      keybutton.symvol.innerHTML = keyElemObj.small;
+    });
   };
 }
 
