@@ -8,6 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env, options) => {
   const isProduction = options.mode === 'production';
+  // const devServer = options.mode === 'webpack-dev-server --open --hot';
   // const isAnalyze = env.analyze;
   const config = {
     mode: isProduction ? 'production' : 'development',
@@ -66,6 +67,7 @@ module.exports = (env, options) => {
         filename: 'style.css',
       }),
     ],
+    // ...devServer(),
   };
 
   return config;

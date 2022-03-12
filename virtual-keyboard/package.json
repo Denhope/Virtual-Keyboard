@@ -6,17 +6,16 @@
   "scripts": {
     "style": "sass --watch src/sass/style.scss src/sass/style.css",
     "dev": "webpack --mode development",
-    "serv": "webpack-dev-server --open --hot",
-    "prod":"webpack --mode production",
+    "prod": "webpack --mode production",
+    "serve": "webpack-dev-server --open --hot",
     "lint": "eslint src/",
-    "lint:fix": "eslint src/ --fix",
     "lint:fix-staged": "eslint --fix"
   },
   "repository": {
     "type": "git",
     "url": ""
   },
-  "author": "",
+  "author": "Denis Kavalchuk",
   "license": "ISC",
   "bugs": {},
   "homepage": "",
@@ -54,6 +53,5 @@
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.6.0",
     "prettier": "^2.4.1"
-    
   }
 }
