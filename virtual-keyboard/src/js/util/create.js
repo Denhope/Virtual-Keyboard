@@ -1,15 +1,15 @@
 /** set interface
- * @param {String} el// div, span...
+ * @param {String} tagName// div, span...
  * @param {String} classNames
  * @param {HTMLElement} children
- * @param {HTMLElement} parent
+ * @param {HTMLElement} parentNode
  * @param  {...array} dataAttr
  */
 
-const create = (el, classNames, children, parent, ...dataAttr) => {
+const create = (tagName, classNames, children, parentNode, ...dataAttr) => {
   let element = null;
   try {
-    element = document.createElement(el);
+    element = document.createElement(tagName);
   } catch (error) {
     throw new Error('Unable to create element');
   }
@@ -26,8 +26,8 @@ const create = (el, classNames, children, parent, ...dataAttr) => {
     element.innerHTML = children;
   }
 
-  if (parent) {
-    parent.appendChild(element);
+  if (parentNode) {
+    parentNode.appendChild(element);
   }
 
   if (dataAttr.length) {
