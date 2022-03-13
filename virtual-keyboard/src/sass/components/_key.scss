@@ -8,6 +8,10 @@
   justify-content: center;
   align-items: center;
   @extend %transition;
-  -webkit-border-radius: 3px;
   user-select: none;
+  padding: 0.2rem;
+}
+
+[data-code='Space'] {
+  grid-column-end: span 6;
 }
