@@ -71,7 +71,7 @@ class Keyboard {
 
     if (type.match(/keydown/)) {
       // console.log(code, type);
-      if (type.match(/key/)) evt.preventDefault();
+      // if (type.match(/key/)) evt.preventDefault();
       keyElemObj.div.style.backgroundColor = 'yellow';
 
       // change lang
