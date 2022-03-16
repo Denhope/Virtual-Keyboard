@@ -69,10 +69,10 @@ const rowsLayout = [
     'AltLeft',
     'Space',
     'AltRight',
+    'ControlRight',
     'ArrowLeft',
     'ArrowDown',
     'ArrowRight',
-    'ControlRight',
   ],
 ];
 export { rowsLayout };

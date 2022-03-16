@@ -5,18 +5,19 @@ class Key {
     this.code = code;
     this.shift = shift;
     this.small = small;
-    // fn keys
-    this.isFnKey = Boolean(small.match(/Enter|Ctrl|arr|Del|Caps|Win|Alt|Tab|Back/));
 
     if (this.shift && this.shift.match(/[^a-zA-Zа-яА-ЯёЁ0-9]/)) {
-      this.subEl = create('div', 'sub', this.shift);
+      this.subElem = create('div', 'sub-el', this.shift);
     } else {
       // no sub
-      this.subEl = create('div', 'sub', ''); // html element
+      this.subElem = create('div', 'sub-el', ''); // html element
     }
 
     this.symvol = create('div', 'symvol', small); // html element
-    this.div = create('div', 'keyboard__key', [this.subEl, this.symvol], null, ['code', this.code]);
+    this.div = create('div', 'keyboard__key', [this.subElem, this.symvol], null, [
+      'code',
+      this.code,
+    ]);
   }
 }
 export { Key };

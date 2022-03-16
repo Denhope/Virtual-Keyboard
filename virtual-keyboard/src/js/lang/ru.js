@@ -300,22 +300,22 @@ export const ru = [
     code: 'ControlRight',
   },
   {
-    small: '&larr;',
+    small: 'larr;',
     shift: null,
     code: 'ArrowLeft',
   },
   {
-    small: '&uarr;',
+    small: 'uarr;',
     shift: null,
     code: 'ArrowUp',
   },
   {
-    small: '&darr;',
+    small: 'darr;',
     shift: null,
     code: 'ArrowDown',
   },
   {
-    small: '&rarr;',
+    small: 'rarr;',
     shift: null,
     code: 'ArrowRight',
   },
