@@ -55,6 +55,30 @@ class Keyboard {
     });
     document.addEventListener('keydown', this.handleEvent);
     document.addEventListener('keyup', this.handleEvent);
+    this.keyboardDiv.onmousedown = this.preHandleEvent;
+    this.keyboardDiv.onmouseup = this.preHandleEvent;
+  };
+
+  preHandleEvent = (evt) => {
+    evt.stopPropagation();
+    // if (evt.target.matches('.keyboard__key')) {
+    const keyDiv = evt.target.closest('.keyboard__key');
+    const {
+      dataset: { code },
+    } = keyDiv;
+    keyDiv.addEventListener('mouseleave', this.resetButtonState);
+    this.handleEvent({ code, type: evt.type });
+    // }
+  };
+
+  resetButtonState = ({
+    target: {
+      dataset: { code },
+    },
+  }) => {
+    const keyObjElem = this.keyButtons.find((key) => key.code === code);
+    // keyObjElem.div.classList.remove('active');
+    keyObjElem.div.removeEventListener('mouseleave', this.resetButtonState);
   };
 
   handleEvent = (evt) => {
@@ -69,9 +93,9 @@ class Keyboard {
     // key not found
     if (!keyElemObj) return;
 
-    if (type.match(/keydown/)) {
+    if (type.match(/keydown|mousedown/)) {
       // console.log(code, type);
-      // if (type.match(/key/)) evt.preventDefault();
+      if (type.match(/key/)) evt.preventDefault();
       keyElemObj.div.style.backgroundColor = 'yellow';
 
       // change lang
@@ -102,7 +126,7 @@ class Keyboard {
           );
         }
       }
-    } else if (type.match(/keyup/)) {
+    } else if (type.match(/keyup|mouseup/)) {
       // console.log(keyElemObj);
       if (code.match(/ShiftLeft/)) this.shiftKey = false;
       if (code.match(/AltLeft/)) this.altKey = false;
@@ -139,22 +163,6 @@ class Keyboard {
 
   printToTextArea = (keyElemObj, symvol) => {
     console.log(symvol);
-    const cursorPosition = this.textOutput.selectionStart;
-
-    // const left = this.textOutput.ariaValueMax.slice(0, cursorPosition);
-    // const right = this.textOutput.ariaValueMax.slice(cursorPosition);
-    // this.textOutput.value = `${left}${symvol || ''}${right}`;
-    // this.textOutput.value = `${symvol}${cursorPosition}`;
-    // const outputLetter = keybutton.symvol;
-    // const buffer = [];
-    // buffer.push(outputLetter);
-
-    // this.textOutput.setSelectionRange(cursorPosition, cursorPosition);
-
-    // this.textOutput.value = `${left}${symvol || ''}${right}`;
-    // console.log(cursorPosition);
-    // console.log(buffer);
-    // this.textOutput.value.push(symvol);
   };
 }
 
