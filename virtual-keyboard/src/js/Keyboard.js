@@ -48,6 +48,7 @@ class Keyboard {
         const keyElemObj = this.keyLangBase.find((key) => key.code === code);
         if (keyElemObj) {
           const keyButton = new Key(keyElemObj);
+
           this.keyButtons.push(keyButton);
           rowElem.appendChild(keyButton.div);
         }
@@ -77,17 +78,16 @@ class Keyboard {
     },
   }) => {
     const keyObjElem = this.keyButtons.find((key) => key.code === code);
-    // keyObjElem.div.classList.remove('active');
     keyObjElem.div.removeEventListener('mouseleave', this.resetButtonState);
   };
 
-  handleEvent = (evt) => {
+  handleEvent = (evt, keyElemObj) => {
     if (evt.stopPropagation) evt.stopPropagation();
     // distract evt(code and type)
     const { code } = evt;
     const { type } = evt;
     // console.log(code, type);
-    const keyElemObj = this.keyButtons.find((key) => key.code === code);
+    keyElemObj = this.keyButtons.find((key) => key.code === code);
     this.textOutput.focus();
 
     // key not found
@@ -95,7 +95,7 @@ class Keyboard {
 
     if (type.match(/keydown|mousedown/)) {
       // console.log(code, type);
-      if (type.match(/key/)) evt.preventDefault();
+      // if (type.match(/key/)) evt.preventDefault();
       keyElemObj.div.style.backgroundColor = 'yellow';
 
       // change lang
@@ -107,23 +107,22 @@ class Keyboard {
       if (code.match(/AltLeft/) && this.shiftKey) this.changeLanguage();
 
       // caps press
-      if (code.match(/Capslock/)) {
+      if (code.match(/Caps/) && !this.isCaps) {
         this.capsKey = true;
         this.isCaps = true;
+      } else if (code.match(/Caps/) && this.isCaps) {
+        this.isCaps = false;
+        // this.switchUpperCase(false);
+        // keyObj.divContainer.classList.remove('active');
+        keyElemObj.div.style.backgroundColor = 'black';
       }
       if (!this.isCaps) {
         this.printToTextArea(keyElemObj, this.shiftKey ? keyElemObj.shift : keyElemObj.small);
       } else if (this.isCaps) {
         if (this.shiftKey) {
-          this.printToTextArea(
-            keyElemObj,
-            keyElemObj.subElem.innerHTML ? keyElemObj.shift : keyElemObj.small,
-          );
+          this.printToTextArea(keyElemObj, keyElemObj.subElem.innerHTML ? keyElemObj.shift : keyElemObj.small);
         } else {
-          this.printToTextArea(
-            keyElemObj,
-            !keyElemObj.subElem.innerHTML ? keyElemObj.shift : keyElemObj.small,
-          );
+          this.printToTextArea(keyElemObj, !keyElemObj.subElem.innerHTML ? keyElemObj.shift : keyElemObj.small);
         }
       }
     } else if (type.match(/keyup|mouseup/)) {
@@ -139,9 +138,7 @@ class Keyboard {
     let langIndex = langID.indexOf(this.keyboardDiv.dataset.language);
 
     this.keyLangBase =
-      langIndex + 1 < langID.length
-        ? language[langID[(langIndex += 1)]]
-        : language[langID[(langIndex -= langIndex)]];
+      langIndex + 1 < langID.length ? language[langID[(langIndex += 1)]] : language[langID[(langIndex -= langIndex)]];
 
     this.keyboardDiv.dataset.language = langID[langIndex];
     setLocalStorage('lang', langID[langIndex]);
@@ -163,6 +160,51 @@ class Keyboard {
 
   printToTextArea = (keyElemObj, symvol) => {
     console.log(symvol);
+    // let cursorPosition = this.textOutput.selectionStart;
+    // const left = this.textOutput.value.slice(0, cursorPosition);
+    // const right = this.textOutput.value.slice(cursorPosition);
+    // const functionsButtonsHandler = {
+    //   Tab: () => {
+    //     this.textOutput.value = `${left}\t${right}`;
+    //     cursorPosition += 1;
+    //   },
+    //   ArrowLeft: () => {
+    //     cursorPosition = cursorPosition - 1 >= 0 ? cursorPosition - 1 : 0;
+    //   },
+    //   ArrowRight: () => {
+    //     cursorPosition += 1;
+    //   },
+    //   ArrowUp: () => {
+    //     const positionFromLeft = this.textOutput.value.slice(0, cursorPosition).match(/(\n).*$(?!\1)/g) || [[1]];
+    //     cursorPosition -= positionFromLeft[0].length;
+    //   },
+    //   ArrowDown: () => {
+    //     const positionFromLeft = this.textArea.value.slice(cursorPosition).match(/^.*(\n).*(?!\1)/) || [[1]];
+    //     cursorPosition += positionFromLeft[0].length;
+    //   },
+    //   Enter: () => {
+    //     this.textOutput.value = `${left}\n${right}`;
+    //     cursorPosition += 1;
+    //   },
+    //   Delete: () => {
+    //     this.textOutput.value = `${left}${right.slice(1)}`;
+    //   },
+    //   Backspace: () => {
+    //     this.textOutput.value = `${left.slice(0, -1)}${right}`;
+    //     cursorPosition -= 1;
+    //   },
+    //   Space: () => {
+    //     this.textOutput.value = `${left} ${right}`;
+    //     cursorPosition += 1;
+    //   },
+    // };
+
+    // if (functionsButtonsHandler[keyElemObj.code]) functionsButtonsHandler[keyElemObj.code]();
+    // else if (!keyElemObj.isFnKey) {
+    //   cursorPosition += 1;
+    //   this.textOutput.value = `${left}${symbol || ''}${right}`;
+    // }
+    // this.textOutput.setSelectionRange(cursorPosition, cursorPosition);
   };
 }
 
