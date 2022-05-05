@@ -115,6 +115,31 @@ class Keyboard {
     }
   };
 
+  changeLanguage = () => {
+    const langID = Object.keys(language);
+    let langIndex = langID.indexOf(this.keyboardDiv.dataset.language);
+
+    this.keyLangBase =
+      langIndex + 1 < langID.length ? language[langID[(langIndex += 1)]] : language[langID[(langIndex -= langIndex)]];
+
+    this.keyboardDiv.dataset.language = langID[langIndex];
+    setLocalStorage('lang', langID[langIndex]);
+
+    this.keyButtons.forEach((keybutton) => {
+      const keyElemObj = this.keyLangBase.find((key) => key.code === keybutton.code);
+      if (!keyElemObj) return;
+      keybutton.shift = keyElemObj.shift;
+      keybutton.small = keyElemObj.small;
+
+      if (keyElemObj.shift && keyElemObj.shift.match(/[^a-zA-Zа-яА-ЯёЁ0-9]/g)) {
+        keybutton.subElem.innerHTML = keyElemObj.shift;
+      } else {
+        keybutton.subElem.innerHTML = '';
+      }
+      keybutton.symvol.innerHTML = keyElemObj.small;
+    });
+  };
+
   printToTextArea = (keyElemObj, symvol) => {
     console.log(symvol);
   };
