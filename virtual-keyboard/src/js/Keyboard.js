@@ -92,13 +92,15 @@ class Keyboard {
 
       // caps press
       if (code.match(/Caps/) && !this.isCaps) {
-        this.capsKey = true;
+        // this.capsKey = true;
         this.isCaps = true;
       } else if (code.match(/Caps/) && this.isCaps) {
         this.isCaps = false;
 
         keyElemObj.div.style.backgroundColor = 'black';
       }
+
+      //no Caps
       if (!this.isCaps) {
         this.printToTextArea(keyElemObj, this.shiftKey ? keyElemObj.shift : keyElemObj.small);
       } else if (this.isCaps) {
@@ -141,7 +143,14 @@ class Keyboard {
   };
 
   printToTextArea = (keyElemObj, symvol) => {
-    console.log(symvol);
+    // console.log(symvol);
+    let cursorPosition = this.textOutput.selectionStart;
+    const start = this.textOutput.value.slice(0, cursorPosition);
+    const end = this.textOutput.value.slice(cursorPosition);
+    cursorPosition += 1;
+    this.textOutput.value = `${start}${symvol}${end}`;
+
+    // console.log(cursorPosition);
   };
 }
 
