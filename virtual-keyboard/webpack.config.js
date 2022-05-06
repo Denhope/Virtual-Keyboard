@@ -1,15 +1,11 @@
-// const webpack = require('webpack');
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer');
-// const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = (env, options) => {
   const isProduction = options.mode === 'production';
-  // const devServer = options.mode === 'webpack-dev-server --open --hot';
-  // const isAnalyze = env.analyze;
+
   const config = {
     mode: isProduction ? 'production' : 'development',
     devtool: isProduction ? 'source-map' : 'eval',
@@ -21,7 +17,7 @@ module.exports = (env, options) => {
       assetModuleFilename: 'assets/public/[hash][ext]',
     },
     optimization: {
-      minimize: false,
+      // minimize: false,
     },
     resolve: {
       extensions: ['.js', '.json', '.mjs'],
