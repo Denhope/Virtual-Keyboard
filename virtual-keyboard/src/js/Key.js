@@ -14,7 +14,7 @@ class Key {
     }
 
     this.symvol = create('div', 'symvol', small); // html element
-    this.div = create('div', 'keyboard__key', [this.subElem, this.symvol], null, ['code', this.code]);
+    this.div = create('div', `keyboard__key key-${this.code}`, [this.subElem, this.symvol], null);
   }
 }
 

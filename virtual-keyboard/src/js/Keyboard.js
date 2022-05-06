@@ -38,11 +38,16 @@ class Keyboard {
         const keyElemObj = this.keyLangBase.find((key) => key.code === code); //object
         if (keyElemObj) {
           const keyButton = new Key(keyElemObj);
+
           keyButton.div.onmousedown = (evt) => {
+            keyButton.div.classList.add('click-active'); ///////
             this.handleEvent({ code: keyButton.code, type: evt.type });
           };
 
           keyButton.div.onmouseup = (evt) => {
+            setTimeout(() => {
+              keyButton.div.classList.remove('click-active');
+            }, 170);
             this.handleEvent({ code: keyButton.code, type: evt.type });
           };
 
@@ -60,8 +65,7 @@ class Keyboard {
     const { code } = evt;
     const { type } = evt;
     // console.log(code, type);
-    const keyElemObj = this.keyButtons.find((key) => key.code === code);
-    // this.textOutput.focus();
+    const keyElemObj = this.keyButtons.find((key) => key.code === code); //obj
 
     // key not found
     if (!keyElemObj) return;
@@ -69,7 +73,7 @@ class Keyboard {
     if (type.match(/keydown|mousedown/)) {
       // console.log(code, type);
       if (type.match(/key/)) evt.preventDefault();
-      keyElemObj.div.style.backgroundColor = 'yellow';
+      keyElemObj.div.classList.add('active');
 
       // change lang
       if (code.match(/ShiftLeft/)) this.shiftKey = true;
@@ -86,7 +90,7 @@ class Keyboard {
       } else if (code.match(/Caps/) && this.isCaps) {
         this.isCaps = false;
 
-        keyElemObj.div.style.backgroundColor = 'black';
+        keyElemObj.div.classList.remove('active');
       }
 
       //no Caps
@@ -108,7 +112,7 @@ class Keyboard {
     } else if (type.match(/keyup|mouseup/)) {
       if (code.match(/ShiftLeft/)) this.shiftKey = false;
       if (code.match(/AltLeft/)) this.altKey = false;
-      keyElemObj.div.style.backgroundColor = 'black';
+      keyElemObj.div.classList.remove('active');
     }
   };
 

@@ -12,10 +12,13 @@
   padding: 0.2rem;
 }
 
-[data-code='Space'] {
+.key-Space{
   grid-column-end: span 6;
 }
 
 .active{
-  background-color: aqua;
+  background-color: yellow;
+}
+.click-active{
+  background-color: yellow;
 }
