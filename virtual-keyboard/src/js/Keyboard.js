@@ -2,6 +2,7 @@ import { language } from './lang/language';
 import { create } from './util/create';
 import { Key } from './Key';
 import { setLocalStorage } from './util/storage';
+import { Texarea } from './Textarea';
 
 // create main
 const wrapper = create('div', 'wrapper main__wrapper', [
@@ -21,17 +22,7 @@ class Keyboard {
     // change rowsKeyboard (ru||en||...)
     this.keyLangBase = language[lang]; // []
     // create texarea
-    this.textOutput = create(
-      'textarea',
-      'text-output',
-      null,
-      wrapper,
-      ['placeholder', 'Please type anything'],
-      ['rows', 5],
-      ['cols', 60],
-      ['autocorect', 'off'],
-    );
-
+    this.textOutput = new Texarea(wrapper);
     this.keyboardDiv = create('div', 'keyboard', null, wrapper, ['language', lang]);
     document.body.appendChild(main);
     main.appendChild(wrapper);
@@ -72,7 +63,7 @@ class Keyboard {
     const { type } = evt;
     // console.log(code, type);
     const keyElemObj = this.keyButtons.find((key) => key.code === code);
-    this.textOutput.focus();
+    // this.textOutput.focus();
 
     // key not found
     if (!keyElemObj) return;
@@ -102,12 +93,18 @@ class Keyboard {
 
       //no Caps
       if (!this.isCaps) {
-        this.printToTextArea(keyElemObj, this.shiftKey ? keyElemObj.shift : keyElemObj.small);
+        this.textOutput.printToTextArea(keyElemObj, this.shiftKey ? keyElemObj.shift : keyElemObj.small);
       } else if (this.isCaps) {
         if (this.shiftKey) {
-          this.printToTextArea(keyElemObj, keyElemObj.subElem.innerHTML ? keyElemObj.shift : keyElemObj.small);
+          this.textOutput.printToTextArea(
+            keyElemObj,
+            keyElemObj.subElem.innerHTML ? keyElemObj.shift : keyElemObj.small,
+          );
         } else {
-          this.printToTextArea(keyElemObj, !keyElemObj.subElem.innerHTML ? keyElemObj.shift : keyElemObj.small);
+          this.textOutput.printToTextArea(
+            keyElemObj,
+            !keyElemObj.subElem.innerHTML ? keyElemObj.shift : keyElemObj.small,
+          );
         }
       }
     } else if (type.match(/keyup|mouseup/)) {
@@ -140,17 +137,6 @@ class Keyboard {
       }
       keybutton.symvol.innerHTML = keyElemObj.small;
     });
-  };
-
-  printToTextArea = (keyElemObj, symvol) => {
-    // console.log(symvol);
-    let cursorPosition = this.textOutput.selectionStart;
-    const start = this.textOutput.value.slice(0, cursorPosition);
-    const end = this.textOutput.value.slice(cursorPosition);
-    cursorPosition += 1;
-    this.textOutput.value = `${start}${symvol}${end}`;
-
-    // console.log(cursorPosition);
   };
 }
 
