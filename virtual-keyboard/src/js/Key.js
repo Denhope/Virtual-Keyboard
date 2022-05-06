@@ -5,11 +5,13 @@ class Key {
     this.code = code;
     this.shift = shift;
     this.small = small;
+    this.isFnKey = Boolean(this.small.match(/Tab|Caps|Shift|Ctrl|Win|Alt|Space|Enter|Del|Back|arr/));
 
+    // subElem
     if (this.shift && this.shift.match(/[^a-zA-Zа-яА-ЯёЁ0-9]/)) {
       this.subElem = create('div', 'sub-el', this.shift);
     } else {
-      // no sub
+      // no subEl
       this.subElem = create('div', 'sub-el', ''); // html element
     }
 

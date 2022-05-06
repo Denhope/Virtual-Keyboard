@@ -15,11 +15,16 @@ class Texarea {
 
   printToTextArea = (keyElemObj, symvol) => {
     // console.log(symvol);
+    // console.log(keyElemObj.code);
+    // console.log(keyElemObj.small);
     let cursorPosition = this.textOutput.selectionStart;
     const start = this.textOutput.value.slice(0, cursorPosition);
     const end = this.textOutput.value.slice(cursorPosition);
-    cursorPosition += 1;
-    this.textOutput.value = `${start}${symvol}${end}`;
+
+    if (!keyElemObj.isFnKey) {
+      cursorPosition += 1;
+      this.textOutput.value = `${start}${symvol}${end}`;
+    }
   };
 }
 export { Texarea };
