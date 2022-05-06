@@ -1,4 +1,3 @@
-import { Keyboard } from './Keyboard';
 import { create } from './util/create';
 
 class Key {
@@ -18,4 +17,5 @@ class Key {
     this.div = create('div', 'keyboard__key', [this.subElem, this.symvol], null, ['code', this.code]);
   }
 }
+
 export { Key };

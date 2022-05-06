@@ -4,13 +4,6 @@ import { Key } from './Key';
 import { setLocalStorage } from './util/storage';
 import { Texarea } from './Textarea';
 
-// create main
-const wrapper = create('div', 'wrapper main__wrapper', [
-  create('h1', 'title', 'Virtual Keyboard'),
-  create('h3', 'subtitle', 'Windows keyboard'),
-]);
-const main = create('main', 'main', wrapper);
-
 class Keyboard {
   constructor(rowsLayout) {
     this.rowsLayout = rowsLayout;
@@ -20,12 +13,17 @@ class Keyboard {
 
   initialize(lang) {
     // change rowsKeyboard (ru||en||...)
+    this.wrapper = create('div', 'wrapper main__wrapper', [
+      create('h1', 'title', 'Virtual Keyboard'),
+      create('h3', 'subtitle', 'Windows keyboard'),
+    ]);
+    const main = create('main', 'main', this.wrapper);
     this.keyLangBase = language[lang]; // []
     // create texarea
-    this.textOutput = new Texarea(wrapper);
-    this.keyboardDiv = create('div', 'keyboard', null, wrapper, ['language', lang]);
+    this.textOutput = new Texarea(this.wrapper);
+    this.keyboardDiv = create('div', 'keyboard', null, this.wrapper, ['language', lang]);
     document.body.appendChild(main);
-    main.appendChild(wrapper);
+    main.appendChild(this.wrapper);
     return this;
   }
 
