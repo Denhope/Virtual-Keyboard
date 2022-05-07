@@ -1,6 +1,6 @@
 .keyboard__key {
   color: $color-text;
-  background: black;
+  background: #2c2a2a;
   display: flex;
   cursor: pointer;
   border-radius: 3px;
@@ -10,20 +10,47 @@
   @extend %transition;
   user-select: none;
   padding: 0.2rem;
-  &:hover {
-    box-shadow: $shadow;   
-    
-  }
 
+  &:hover {
+    box-shadow: $shadow;
+  }
 }
 
-.key-Space{
+.key-Space {
   grid-column-end: span 6;
 }
 
-.active{
+.key-Enter {
+  grid-column-end: span 2;
+}
+
+.key-ShiftLeft,
+.key-ShiftRight,
+.key-Enter,
+.key-Delete,
+.key-Backspace,
+.key-Tab,
+.key-CapsLock,
+.key-AltLeft,
+.key-AltRight,
+.key-ControlRight,
+.key-ControlLeft,
+.key-Win,
+.key-ArrowDown,
+.key-ArrowUp,
+.key-ArrowLeft,
+.key-ArrowRight {
+  background-color: black;
+}
+
+.active {
   background-color: yellow;
 }
-.click-active{
+
+.click-active {
   background-color: yellow;
+}
+
+.key-Fn {
+  background-color: black;
 }

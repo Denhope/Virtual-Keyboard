@@ -29,6 +29,7 @@ const rowsLayout = [
     'KeyP',
     'BracketLeft',
     'BracketRight',
+
     'Backspace',
   ],
   [
@@ -44,12 +45,12 @@ const rowsLayout = [
     'KeyL',
     'Semicolon',
     'Quote',
-    'Backslash',
+    // 'Backslash',
     'Enter',
   ],
   [
     'ShiftLeft',
-    'IntlBackslash',
+    // 'IntlBackslash',
     'KeyZ',
     'KeyX',
     'KeyC',
@@ -60,6 +61,7 @@ const rowsLayout = [
     'Comma',
     'Period',
     'Slash',
+    'Backslash',
     'ArrowUp',
     'ShiftRight',
   ],

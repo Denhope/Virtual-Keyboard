@@ -4,12 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "style": "sass --watch src/sass/style.scss src/sass/style.css",
     "dev": "webpack --mode development",
     "prod": "webpack --mode production",
-    "serve": "webpack-dev-server --open --hot",
+    "start": "webpack-dev-server --open --hot",
     "lint": "eslint src/",
-    "lint:fix-staged": "eslint --fix",
+    "lint:fix-staged": "eslint src/ --fix",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|json)\""
   },
   "repository": {
