@@ -38,6 +38,12 @@ class Texarea {
       if (keyElemObj.code === 'ArrowRight') {
         cursorPosition += 1;
       }
+      if (keyElemObj.code === 'ArrowUp') {
+        cursorPosition = cursorPosition - 1 >= 0 ? cursorPosition - 1 : 0;
+      }
+      if (keyElemObj.code === 'ArrowDown') {
+        cursorPosition += 1;
+      }
       if (keyElemObj.code === 'Enter') {
         this.textOutput.value = `${start}\n${end}`;
         cursorPosition += 1;
