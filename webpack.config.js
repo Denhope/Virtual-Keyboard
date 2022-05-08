@@ -16,9 +16,7 @@ module.exports = (env, options) => {
       filename: 'script.js',
       assetModuleFilename: 'assets/public/[hash][ext]',
     },
-    optimization: {
-      // minimize: false,
-    },
+    optimization: {},
     resolve: {
       extensions: ['.js', '.json', '.mjs'],
     },
@@ -63,7 +61,6 @@ module.exports = (env, options) => {
         filename: 'style.css',
       }),
     ],
-    // ...devServer(),
   };
 
   return config;
