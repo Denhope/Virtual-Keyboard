@@ -12,7 +12,7 @@ class Keyboard {
   }
 
   initialize(lang) {
-    // change rowsKeyboard (ru||en||...)
+    // change rowsKeyboard (ru||en)
     this.wrapper = create('div', 'wrapper main__wrapper', [
       create('h1', 'title', 'Virtual Keyboard'),
       create('h3', 'subtitle', 'Keyboard for Windows'),
@@ -84,7 +84,6 @@ class Keyboard {
       if (code.match(/Caps/) && !this.isCaps) {
         // this.capsKey = true;
         this.isCaps = true;
-        // this.upperCase(true);
       } else if (code.match(/Caps/) && this.isCaps) {
         this.isCaps = false;
 
@@ -119,12 +118,6 @@ class Keyboard {
       keyElemObj.div.classList.remove('active');
     }
   };
-
-  // ToUpperCase() {
-  //   this.keyButtons.forEach((button) => {
-  //     button.symvol.innerHTML = button.shift;
-  //   });
-  // }
 
   changeLanguage = () => {
     const langID = Object.keys(language);

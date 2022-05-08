@@ -17,9 +17,6 @@ class Texarea {
 
   printToTextArea = (keyElemObj, symvol) => {
     this.textOutput.focus;
-    // console.log(symvol);
-    // console.log(keyElemObj.code);
-    // console.log(keyElemObj.small);
     let cursorPosition = this.textOutput.selectionStart;
     const start = this.textOutput.value.slice(0, cursorPosition);
     const end = this.textOutput.value.slice(cursorPosition);
