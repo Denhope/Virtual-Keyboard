@@ -13,10 +13,12 @@ class Texarea {
       ['autocorect', 'off'],
       ['spellcheck', false],
     );
+    document.onclick = () => {
+      this.textOutput.focus();
+    };
   }
 
   printToTextArea = (keyElemObj, symvol) => {
-    this.textOutput.focus;
     let cursorPosition = this.textOutput.selectionStart;
     const start = this.textOutput.value.slice(0, cursorPosition);
     const end = this.textOutput.value.slice(cursorPosition);

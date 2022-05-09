@@ -43,11 +43,11 @@ const rowsLayout = [
     'KeyK',
     'KeyL',
     'Semicolon',
-    'Quote',    
+    'Quote',
     'Enter',
   ],
   [
-    'ShiftLeft',    
+    'ShiftLeft',
     'KeyZ',
     'KeyX',
     'KeyC',

@@ -25,6 +25,7 @@ class Keyboard {
     this.keyboardDiv = create('div', 'keyboard', null, this.wrapper, ['language', lang]);
     document.body.appendChild(main);
     main.appendChild(this.wrapper);
+    // this.textOutput.focus()
     return this;
   }
 
@@ -61,14 +62,12 @@ class Keyboard {
     // distract evt(code and type)
     const { code } = evt;
     const { type } = evt;
-
     const keyElemObj = this.keyButtons.find((key) => key.code === code);
 
     // key not found
     if (!keyElemObj) return;
 
     if (type.match(/keydown|mousedown/)) {
-      // console.log(code, type);
       if (type.match(/key/)) evt.preventDefault();
       keyElemObj.div.classList.add('active');
 
@@ -79,13 +78,15 @@ class Keyboard {
 
       if (code.match(/ShiftLeft/) && this.altKey) this.changeLanguage();
       if (code.match(/AltLeft/) && this.shiftKey) this.changeLanguage();
+      if (this.shiftKey) this.changeUpperKey(true);
 
       // caps press
       if (code.match(/Caps/) && !this.isCaps) {
-        // this.capsKey = true;
         this.isCaps = true;
+        this.changeUpperKey(true);
       } else if (code.match(/Caps/) && this.isCaps) {
         this.isCaps = false;
+        this.changeUpperKey(false);
 
         setTimeout(() => {
           keyElemObj.div.classList.remove('active');
@@ -113,7 +114,10 @@ class Keyboard {
         }
       }
     } else if (type.match(/keyup|mouseup/)) {
-      if (code.match(/ShiftLeft/)) this.shiftKey = false;
+      if (code.match(/ShiftLeft/)) {
+        this.shiftKey = false;
+        this.changeUpperKey(false);
+      }
       if (code.match(/AltLeft/)) this.altKey = false;
       keyElemObj.div.classList.remove('active');
     }
@@ -144,6 +148,47 @@ class Keyboard {
       }
       keyButtonCur.symvol.innerHTML = keyElemObj.small;
     });
+  };
+
+  changeUpperKey = (isActive) => {
+    if (isActive) {
+      this.keyButtons.forEach((keyButton) => {
+        const keyButtonCur = keyButton;
+        if (
+          !keyButtonCur.isFnKey
+          && this.isCaps
+          && !this.shiftKey
+          && !keyButtonCur.subElem.innerHTML
+        ) {
+          keyButtonCur.symvol.innerHTML = keyButton.shift;
+        }
+        if (!keyButtonCur.isFnKey && this.isCaps && this.shiftKey) {
+          keyButtonCur.symvol.innerHTML = keyButton.small;
+        }
+        if (!keyButtonCur.isFnKey && !keyButtonCur.subElem.innerHTML) {
+          keyButtonCur.symvol.innerHTML = keyButton.shift;
+        }
+      });
+    } else {
+      this.keyButtons.forEach((keyButton) => {
+        const keyButtonCur = keyButton;
+        if (keyButtonCur.subElem.innerHTML && !keyButtonCur.isFnKey) {
+          if (!this.isCaps) {
+            keyButtonCur.symvol.innerHTML = keyButton.small;
+          }
+          if (!this.isCaps) {
+            keyButtonCur.symvol.innerHTML = keyButton.shift;
+          }
+        }
+        if (!keyButtonCur.isFnKey) {
+          if (this.isCaps) {
+            keyButtonCur.symvol.innerHTML = keyButton.shift;
+          } else {
+            keyButtonCur.symvol.innerHTML = keyButton.small;
+          }
+        }
+      });
+    }
   };
 }
 
