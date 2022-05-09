@@ -150,8 +150,8 @@ class Keyboard {
     });
   };
 
-  changeUpperKey = (isActive) => {
-    if (isActive) {
+  changeUpperKey(isTrue) {
+    if (isTrue) {
       this.keyButtons.forEach((keyButton) => {
         const keyButtonCur = keyButton;
         if (
@@ -161,11 +161,9 @@ class Keyboard {
           && !keyButtonCur.subElem.innerHTML
         ) {
           keyButtonCur.symvol.innerHTML = keyButton.shift;
-        }
-        if (!keyButtonCur.isFnKey && this.isCaps && this.shiftKey) {
+        } else if (!keyButtonCur.isFnKey && this.isCaps && this.shiftKey) {
           keyButtonCur.symvol.innerHTML = keyButton.small;
-        }
-        if (!keyButtonCur.isFnKey && !keyButtonCur.subElem.innerHTML) {
+        } else if (!keyButtonCur.isFnKey && !keyButtonCur.subElem.innerHTML) {
           keyButtonCur.symvol.innerHTML = keyButton.shift;
         }
       });
@@ -176,11 +174,7 @@ class Keyboard {
           if (!this.isCaps) {
             keyButtonCur.symvol.innerHTML = keyButton.small;
           }
-          if (!this.isCaps) {
-            keyButtonCur.symvol.innerHTML = keyButton.shift;
-          }
-        }
-        if (!keyButtonCur.isFnKey) {
+        } else if (!keyButtonCur.isFnKey) {
           if (this.isCaps) {
             keyButtonCur.symvol.innerHTML = keyButton.shift;
           } else {
@@ -189,7 +183,7 @@ class Keyboard {
         }
       });
     }
-  };
+  }
 }
 
 export { Keyboard };
