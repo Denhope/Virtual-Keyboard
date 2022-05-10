@@ -43,6 +43,9 @@ class Keyboard {
 
           keyButton.div.onmousedown = (evt) => {
             this.handleEvent({ code: keyButton.code, type: evt.type });
+            keyButton.div.onmouseleave = () => {
+              keyButton.div.classList.remove('active');
+            };
           };
 
           keyButton.div.onmouseup = (evt) => {
@@ -72,7 +75,7 @@ class Keyboard {
       keyElemObj.div.classList.add('active');
 
       // change lang
-      if (code.match(/Shift/)) this.shiftKey = true;      
+      if (code.match(/Shift/)) this.shiftKey = true;
       if (code.match(/AltLeft/)) this.altKey = true;
 
       if (code.match(/ShiftLeft/) && this.altKey) this.changeLanguage();
