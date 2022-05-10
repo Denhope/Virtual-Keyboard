@@ -72,8 +72,7 @@ class Keyboard {
       keyElemObj.div.classList.add('active');
 
       // change lang
-      if (code.match(/ShiftLeft/)) this.shiftKey = true;
-      if (code.match(/ShiftRight/)) this.shiftKey = true;
+      if (code.match(/Shift/)) this.shiftKey = true;      
       if (code.match(/AltLeft/)) this.altKey = true;
 
       if (code.match(/ShiftLeft/) && this.altKey) this.changeLanguage();
@@ -114,7 +113,7 @@ class Keyboard {
         }
       }
     } else if (type.match(/keyup|mouseup/)) {
-      if (code.match(/ShiftLeft/)) {
+      if (code.match(/Shift/)) {
         this.shiftKey = false;
         this.changeUpperKey(false);
       }
