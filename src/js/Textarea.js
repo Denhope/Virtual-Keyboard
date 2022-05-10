@@ -23,14 +23,13 @@ class Texarea {
     const start = this.textOutput.value.slice(0, cursorPosition);
     const end = this.textOutput.value.slice(cursorPosition);
 
-    if (!keyElemObj.isFnKey) {      
-      this.textOutput.value = `${start}${symvol}${end}`;      
+    if (!keyElemObj.isFnKey) {
+      this.textOutput.value = `${start}${symvol}${end}`;
       cursorPosition += 1;
-      if (keyElemObj.code === 'Space')  {
-        this.textOutput.value = `${start} ${end}`;        
+      if (keyElemObj.code === 'Space') {
+        this.textOutput.value = `${start} ${end}`;
         cursorPosition += 1;
       }
-
     } else {
       if (keyElemObj.code === 'Tab') {
         this.textOutput.value = `${start}\t${end}`;
@@ -59,11 +58,6 @@ class Texarea {
       if (keyElemObj.code === 'Delete') {
         this.textOutput.value = `${start}${end.slice(1)}`;
       }
-      // if (keyElemObj.code === 'Space')  {
-      //   this.textOutput.value = `${start} ${end}`;
-      //   console.log('11111')
-      //   cursorPosition += 1;
-      // }
     }
     this.textOutput.setSelectionRange(cursorPosition, cursorPosition);
   };
